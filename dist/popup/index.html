@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreekFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Dashboard -->
+    <div id="dashboard-view" class="view">
+      <header class="header">
+        <h1>StreekFlow</h1>
+        <button id="add-goal-btn" class="btn btn-primary btn-sm">+ New</button>
+      </header>
+      
+      <div id="goals-list" class="goals-list"></div>
+      
+      <div id="empty-state" class="empty-state hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        <p>No goals yet</p>
+        <p class="sub">Start tracking your progress</p>
+      </div>
+    </div>
+
+    <!-- Calendar View -->
+    <div id="calendar-view" class="view hidden">
+      <header class="header">
+        <button id="back-btn" class="btn btn-ghost btn-sm">←</button>
+        <h2 id="calendar-goal-name"></h2>
+        <button id="delete-goal-btn" class="btn btn-ghost btn-sm" title="Delete goal">🗑</button>
+      </header>
+
+      <div class="calendar-header">
+        <button id="prev-month" class="calendar-month-btn">‹</button>
+        <span id="current-month" class="calendar-month-label"></span>
+        <button id="next-month" class="calendar-month-btn">›</button>
+      </div>
+
+      <div class="calendar-weekdays">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+
+      <div id="calendar-grid" class="calendar-grid"></div>
+
+      <div class="calendar-legend">
+        <span><i class="dot empty"></i> Pending</span>
+        <span><i class="dot filled"></i> Done</span>
+        <span><i class="dot before-start"></i> Before start</span>
+      </div>
+    </div>
+
+    <!-- Add Goal Modal -->
+    <div id="add-goal-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title">New Goal</h3>
+        <form id="add-goal-form">
+          <div class="form-group">
+            <label for="goal-name">Goal name</label>
+            <input type="text" id="goal-name" placeholder="e.g. Learn Golang" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="start-date">Start date</label>
+              <input type="date" id="start-date" required>
+            </div>
+            <div class="form-group">
+              <label for="target-days">Target days</label>
+              <input type="number" id="target-days" value="7" min="1" max="365" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="cancel-goal-btn" class="btn btn-secondary btn-sm">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Entry Modal -->
+    <div id="entry-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title">What did you do?</h3>
+        <p id="entry-date-display" class="modal-subtitle"></p>
+        <form id="entry-form">
+          <div class="form-group">
+            <input type="text" id="entry-note" placeholder="e.g. Completed chapter 3" maxlength="80" required autocomplete="off">
+          </div>
+          <div class="form-actions">
+            <button type="button" id="delete-entry-btn" class="btn btn-danger btn-sm hidden">Delete</button>
+            <button type="button" id="cancel-entry-btn" class="btn btn-secondary btn-sm">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip hidden"></div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="calendar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

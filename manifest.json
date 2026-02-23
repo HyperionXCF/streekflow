@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "StreekFlow",
+  "version": "1.0.0",
+  "description": "Track your daily progress and build consistent habits",
+  "icons": {
+    "16": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  },
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "StreekFlow"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
