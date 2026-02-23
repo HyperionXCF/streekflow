@@ -131,8 +131,26 @@ const Calendar = {
     tooltip.classList.remove('hidden');
     
     const rect = e.target.getBoundingClientRect();
-    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-    tooltip.style.top = `${rect.bottom + 6}px`;
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const app = document.getElementById('app');
+    const appRect = app.getBoundingClientRect();
+    
+    let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
+    let top = rect.bottom + 6;
+    
+    // Keep within horizontal bounds
+    if (left < appRect.left + 4) left = appRect.left + 4;
+    if (left + tooltipRect.width > appRect.right - 4) {
+      left = appRect.right - tooltipRect.width - 4;
+    }
+    
+    // Show above if near bottom
+    if (top + tooltipRect.height > appRect.bottom - 4) {
+      top = rect.top - tooltipRect.height - 6;
+    }
+    
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
   },
 
   hideTooltip() {
